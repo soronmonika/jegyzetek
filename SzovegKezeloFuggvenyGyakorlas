@@ -1,0 +1,239 @@
+//Szövegkezelős feladatok
+//F01 - Karaktermennyiség - Megmondja, adott paraméterként kapott szövegről, hogy benne hány darab, 
+//szintén paraméterként kapott betű van!
+function KarakterMennyiseg(szoveg, karakter) {
+    let karakterMennyiseg = 0;
+    for (let i = 0; i < szoveg.length; i++) {
+        if (szoveg[i] == karakter) {
+            karakterMennyiseg++;
+        }
+    }
+    return karakterMennyiseg;
+}
+console.log(KarakterMennyiseg("alma", "a"));
+console.log(KarakterMennyiseg("eszperente", "e"));
+console.log(KarakterMennyiseg("rokkó a ravasz rabló rácsapot egy ragyogó drágakő rakományra, de rettentő rémesen ráfaragott", "r"));
+console.log(KarakterMennyiseg("megszentségteleníthetetlenségeskedéseitekért", "t"));
+
+//Szövegkezelő függvénnyel!
+function KarakterMennyisegV2(szoveg, karakter) {
+    return szoveg.length - szoveg.replaceAll(karakter, "").length
+}
+console.log(KarakterMennyisegV2("alma", "a"));
+//Szövegkezelős feladatok
+//F02 - Capitalize: alakítása át a kifejezést NAGY kezdőbetűssé!
+function CapitalizeV1(szoveg) {
+    let nagykezdobetusSzoveg = ""
+    for (let i = 0; i < szoveg.length; i++) {
+        if (i == 0) {
+            nagykezdobetusSzoveg += szoveg[0].toUpperCase();
+        }
+        else {
+            nagykezdobetusSzoveg += szoveg[i].toLowerCase();
+        }
+    }
+    return nagykezdobetusSzoveg;
+}
+function CapitalizeV2(szoveg) {
+    let nagykezdobetusSzoveg = szoveg[0].toUpperCase();
+    for (let i = 1; i < szoveg.length; i++) {
+        nagykezdobetusSzoveg += szoveg[i].toLowerCase();
+    }
+    return nagykezdobetusSzoveg;
+}
+
+function CapitalizeV3(szoveg) {
+    return szoveg[0].toUpperCase() + szoveg.slice(1, szoveg.length).toLowerCase();
+}
+
+console.log(CapitalizeV1("JavaScript4Life"));
+console.log(CapitalizeV2("JavaScript4Life"));
+console.log(CapitalizeV3("JavaScript4Life"));
+//Szövegkezelős feladatok
+//F03 - camelCaseSzoveg: alaksa át a kapott kifejezést camelCase szöveggé -->egyszerű szöveg==>egyszerűSzöveg
+function Capitalize(szoveg) {
+    return szoveg[0].toUpperCase() + szoveg.slice(1, szoveg.length).toLowerCase();
+}
+
+function camelCaseSzovegV1(leirasSzoveg) {
+    let elemek = leirasSzoveg.split(" ");
+    let ujSzoveg = elemek[0].toLowerCase();
+    for (let i = 1; i < elemek.length; i++) {
+        ujSzoveg += elemek[i].charAt(0).toUpperCase() + elemek[i].toLowerCase().substring(1);
+    }
+    return ujSzoveg;
+}
+
+//Capitalize függvény felhasználásával:
+function camelCaseSzovegV2(leirasSzoveg) {
+    let elemek = leirasSzoveg.split(" ");
+    let ujSzoveg = elemek[0].toLowerCase();
+    for (let i = 1; i < elemek.length; i++) {
+        ujSzoveg += Capitalize(elemek[i]);
+    }
+    return ujSzoveg;
+}
+
+console.log(camelCaseSzovegV1("Géza kék az ég"));
+console.log(camelCaseSzovegV2("Géza kék az ég"));
+//Szövegkezelős feladatok
+//F04 - KarakterTabusito: Törlölje a paramérként kapott szövegben, a paraméterként kapott betűt!
+
+function KarakterTabusitoV1(szoveg, betu) {
+    let ujSzoveg = "";
+    for (let i = 0; i < szoveg.length; i++) {
+        if (szoveg[i] == betu) {
+            ujSzoveg += "";
+        }
+        else {
+            ujSzoveg += szoveg[i];
+        }
+    }
+    return ujSzoveg;
+}
+
+function KarakterTabusitoV2(szoveg, betu) {
+    return szoveg.replaceAll(betu, "");
+}
+
+
+console.log(KarakterTabusitoV1("alma", "a"));
+console.log(KarakterTabusitoV1("eszperente", "e"));
+console.log(KarakterTabusitoV1("megszentségteleníthetetlenségeskedéseitekért", "t"));
+
+
+console.log(KarakterTabusitoV2("alma", "a"));
+console.log(KarakterTabusitoV2("eszperente", "e"));
+console.log(KarakterTabusitoV2("megszentségteleníthetetlenségeskedéseitekért", "t"));
+//Készíts egy függvényt amiben megadva egy kifejezést paraméterben, minden szót nagy kezdőbetűssé alakít benne, valamint a szóközöket eltávolítja belőle
+
+function Capitalize(szoveg) {
+    return szoveg[0].toUpperCase() + szoveg.slice(1, szoveg.length).toLowerCase();
+}
+
+function PascalCaseSzovegGenerator(kifejezes) {
+    let szovegElemek = kifejezes.split(" ");
+    let generaltSzoveg = "";
+    for (let i = 0; i < szovegElemek.length; i++) {
+        generaltSzoveg += Capitalize(szovegElemek[i]);
+    }
+    return generaltSzoveg;
+}
+console.log(PascalCaseSzovegGenerator("Géza kék az ég"));
+//Készíts egy olyan függvényt, ami a paraméterként kapott kifejezés minden karakterét kisbeűssé alakítja, valamint a szóközöket "_" (alulvonás) karakterre cseréli
+
+function snake_case_szoveg_generatorV1(kifejezes) {
+    let ujSzoveg = "";
+    for (let i = 0; i < kifejezes.length; i++) {
+        if (kifejezes[i] == " ") {
+            ujSzoveg += "_";
+        }
+        else {
+            ujSzoveg += kifejezes[i].toLowerCase();
+        }
+    }
+    return ujSzoveg;
+}
+console.log(snake_case_szoveg_generatorV1("Géza kék az ég"));
+
+function snake_case_szoveg_generatorV2(kifejezes) {
+    return kifejezes.toLowerCase().split(" ").join("_");
+}
+console.log(snake_case_szoveg_generatorV2("Géza kék az ég"));
+
+function snake_case_szoveg_generatorV3(kifejezes) {
+    return kifejezes.toLowerCase().replaceAll(' ', '_');
+}
+console.log(snake_case_szoveg_generatorV3("Géza kék az ég"));
+//Készíts egy függvényt, ami a paraméterként kapott szöveget, fordítva adja vissza!
+function SzovegvisszafeleV1(szoveg) {
+    let forditottSzoveg = "";
+    for (let i = szoveg.length - 1; i >= 0; i--) {
+        forditottSzoveg += szoveg[i];
+    }
+    return forditottSzoveg;
+}
+console.log(SzovegvisszafeleV1("Géza kék az ég"));
+
+function SzovegvisszafeleV2(szoveg) {
+    return szoveg.split("").reverse().join("");
+}
+console.log(SzovegvisszafeleV2("Géza kék az ég"));
+//Készíts egy függvényt, ami megszámolja, egy paraméterként kapott kifejezésben mennyi magánhangzó található? 
+//Ügyelj arra, hogy a magánhangzókból, kicsi és NAGY is lehet! :)
+function MaganhangzokMennyisegeV1(szoveg) {
+    let maganhangzokSzama = 0;
+    for (let i = 0; i < szoveg.length; i++) {
+        let betu = szoveg[i].toLowerCase();
+        if (betu == "a" || betu == "á" || betu == "e" || betu == "é" || betu == "i" || betu == "í" || betu == "o" || betu == "ó" || betu == "ö" || betu == "ő" || betu == "u" || betu == "ú" || betu == "ü" || betu == "ű") {
+            //Kisbetűk esetén:
+            maganhangzokSzama++;
+        }
+    }
+    return maganhangzokSzama;
+}
+console.log(MaganhangzokMennyisegeV1("Géza kék az ég"));
+console.log(MaganhangzokMennyisegeV1("Indul a görög aludni"));
+
+function MaganhangzokMennyisegeV2(szoveg) {
+    let maganhangzokSzama = 0;
+    let maganhangzok = ["a", "á", "e", "é", "i", "í", "o", "ó", "ö", "ő", "u", "ú", "ü", "ű"];
+    for (let i = 0; i < szoveg.length; i++) {
+        for (let j = 0; j < maganhangzok.length; j++) {
+            if (szoveg[i].toLowerCase() == maganhangzok[j]) {
+                maganhangzokSzama++;
+            }
+        }
+    }
+    return maganhangzokSzama;
+}
+console.log(MaganhangzokMennyisegeV2("Géza kék az ég"));
+console.log(MaganhangzokMennyisegeV2("Indul a görög aludni"));
+
+function MaganhangzokMennyisegeV3(szoveg) {
+    let maganhangzokSzama = 0;
+    let maganhangzok = "aáeéiíoóöőuúüű";
+    for (let i = 0; i < szoveg.length; i++) {
+        if (maganhangzok.includes(szoveg[i].toLowerCase())) {
+            maganhangzokSzama++;
+        }
+    }
+    return maganhangzokSzama;
+}
+console.log(MaganhangzokMennyisegeV3("Géza kék az ég"));
+console.log(MaganhangzokMennyisegeV3("Indul a görög aludni"));
+//Készíts egy szöveg átalakítót, ami a paraméterként kapott szöveg bizonyos karaktereit helyettesíti.
+//e vagy E-->3
+//o vagy O-->0
+//a vagy A-->4
+//i, í, I vagy Í-->1
+
+function L33tSz0v3gG3n3r4t0rV1(szoveg) {
+    let ujSzoveg = "";
+    for (let i = 0; i < szoveg.length; i++) {
+        if (szoveg[i].toLowerCase() == "e" || szoveg[i].toLowerCase() == "é") {
+            ujSzoveg += 3
+        }
+        else if (szoveg[i].toLowerCase() == "o" || szoveg[i].toLowerCase() == "ó") {
+            ujSzoveg += 0
+        }
+        else if (szoveg[i].toLowerCase() == "a" || szoveg[i].toLowerCase() == "á") {
+            ujSzoveg += 4
+        }
+        else if (szoveg[i].toLowerCase() == "i" || szoveg[i].toLowerCase() == "í") {
+            ujSzoveg += 1
+        }
+        else {
+            ujSzoveg += szoveg[i];
+        }
+    }
+    return ujSzoveg;
+}
+console.log(L33tSz0v3gG3n3r4t0rV1("LeetSzovegGenerátor"));
+console.log(L33tSz0v3gG3n3r4t0rV1("Géza kék az ég!"));
+
+function L33tSz0v3gG3n3r4t0rV2(szoveg) {
+    return szoveg.toLowerCase().replaceAll("e", "3").replaceAll("é", "3").replaceAll("E", "3").replaceAll("É", "3").replaceAll("o", "0").replaceAll("ó", "0").replaceAll("O", "0").replaceAll("Ó", "0").replaceAll("a", "4").replaceAll("á", "4").replaceAll("A", "4").replaceAll("Á", "4").replaceAll("i", "1").replaceAll("I", "1").replaceAll("í", "1").replaceAll("Í", "1");
+}
+console.log(L33tSz0v3gG3n3r4t0rV2("LeetSzovegGenerátor"));
+console.log(L33tSz0v3gG3n3r4t0rV2("Géza kék az ég!"));
